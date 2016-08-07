@@ -1,11 +1,21 @@
 require("./animal");
-var user = require("./user");
+var User = require("./user");
+var db = require("./db");
+db.connect();
 
-var vasya = new user.User('Vasya');
-var petia = new user.User('Petia');
+function run() {
+    var vasya = new User('Vasya');
+    var petia = new User('Petia');
 
-vasya.hello(petia);
+    vasya.hello(petia);
 
-var testAnimal = new Animal('Test');
+    var testAnimal = new Animal('Test');
 
-testAnimal.introduction();
+    testAnimal.introduction();
+}
+
+if (module.parent) {
+    exports.run = run;
+} else {
+    run();
+}
