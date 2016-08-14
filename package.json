@@ -12,6 +12,7 @@
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "ejs-locals": "^1.0.2",
+    "errorhandler": "^1.4.3",
     "express": "~4.13.4",
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.8",
