@@ -12,6 +12,7 @@
     "ejs": "~2.4.1",
     "ejs-locals": "^1.0.2",
     "express": "~4.13.4",
+    "mongodb": "^2.2.5",
     "morgan": "~1.7.0",
     "nconf": "^0.8.4",
     "serve-favicon": "~2.3.0",
