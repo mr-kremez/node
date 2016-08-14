@@ -1,12 +1,15 @@
 <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Main</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">Log in</a></li>
-            </ul>
-        </div>
-    </div>
+    <ul class="nav navbar-nav">
+        <li><a href="/">Main</a></li>
+        <% if (user) { %>
+        <li><a href="/chat">Chat</a></li>
+        <% } %>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <% if (user) { %>
+        <li><a href="" onclick="$('<form method=POST action=/logout></form>').submit();return false">Logout</a></li>
+        <% } else { %>
+        <li><a href="/login">Login</a></li>
+        <% } %>
+    </ul>
 </nav>
