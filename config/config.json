@@ -4,10 +4,19 @@
     "uri": "mongodb://localhost/chat",
     "options": {
       "server": {
-        "socletOptions": {
+        "socketOptions": {
           "keepAlive": 1
         }
       }
+    }
+  },
+  "session": {
+    "secret": "secret_key",
+    "key": "sid",
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": null
     }
   }
 }
