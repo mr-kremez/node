@@ -23,7 +23,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+require('socket')(server);
 log.info('Express server listening on port ' + config.get('port'));
 
 /**
@@ -93,10 +93,3 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
-io.on('connection', function(socket){
-  socket.on('message', function (text, cb) {
-    socket.broadcast.emit('message', text);
-    cb("123");
-  });
-});
