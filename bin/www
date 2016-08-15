@@ -10,6 +10,7 @@ var http = require('http');
 var config = require('../config');
 var log = require('../libs/log')(module);
 
+
 /**
  * Get port from environment and store in Express.
  */
@@ -22,6 +23,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = require('socket.io')(server);
 log.info('Express server listening on port ' + config.get('port'));
 
 /**
@@ -91,3 +93,10 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+io.on('connection', function(socket){
+  socket.on('message', function (text, cb) {
+    socket.broadcast.emit('message', text);
+    cb("123");
+  });
+});
