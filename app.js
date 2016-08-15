@@ -10,6 +10,7 @@ var log = require('libs/log')(module);
 var mongoose = require('libs/mongoose');
 var session = require('express-session');
 var config = require('config');
+var sessionStore = require('libs/sessionStore');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -28,17 +29,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-var MongoStore = require('connect-mongo')(session);
-
 app.use(session({
   secret: config.get('session:secret'),
   key: config.get('session:key'),
   cookie: config.get('session:cookie'),
   saveUninitialized: true,
   resave: false,
-  store: new MongoStore({
-    url: "mongodb://localhost/chat"
-  })
+  store: sessionStore
 }));
 
 app.use(require('middleware/sendHttpError'));

@@ -22,8 +22,14 @@
     var form = $('#room form');
     var ul = $('#room ul');
     socket
-            .on('message', function(message) {
-                printMessage(message);
+            .on('message', function(username, message) {
+                printMessage(username + "> " + message);
+            })
+            .on('leave', function(username) {
+                printStatus(username + " вышел из чата");
+            })
+            .on('join', function(username) {
+                printStatus(username + " вошёл в чат");
             })
             .on('connect', function() {
                 printStatus("Connected");
