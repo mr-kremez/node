@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function updateStats(memuse) {
+            document.getElementById('rss').innerHTML = memuse.rss;
+            document.getElementById('heapTotal').innerHTML = memuse.heapTotal;
+            document.getElementById('heapUsed').innerHTML = memuse.heapUsed;
+        }
+        var ws = new WebSocket('ws://localhost:8080');
+        ws.onmessage = function (event) {
+            updateStats(JSON.parse(event.data));
+        };
+        ws.onopen = function() {
+            console.log("WS connected.");
+        };
+        ws.onclose = function(event) {
+            if (event.wasClean) {
+                console.log("WS was closed clearly");
+            } else {
+                console.log("WS disconnection");
+            }
+            console.log('Code: ' + event.code + ' reason: ' + event.reason);
+        };
+        ws.onerror = function(error) {
+            console.error("Error " + error.message);
+        };
+    </script>
+</head>
+<body>
+    <strong>Server Stats</strong><br>
+    RSS: <div id='rss'></div><br>
+    Heap total: <div id='heapTotal'></div><br>
+    Heap used: <div id='heapUsed'></div><br>
+</body>
+</html>
